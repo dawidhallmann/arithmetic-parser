@@ -4,7 +4,7 @@
 #include <basic.h>
 
 int main() {
-    char expression[100];
+    std::string expression;
     
     while (std::cin >> expression){
         if(validate(expression)){

@@ -1,9 +1,9 @@
 #ifndef basic  
 #define basic
 
-int parse(char *expresion){
-    std::cout << "parsowanie\n";
-    return 0;
+int parse(std::string expresion){
+    for( const auto &c : expresion ) {
+    }
 //    El* elements[MAX_LEN];
 //
 //    char lastChar;
@@ -25,6 +25,7 @@ int parse(char *expresion){
 //
 //        cout << ch << "\n";
 //    }
+    return 0;
 }
 
 #endif

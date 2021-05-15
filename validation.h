@@ -1,7 +1,7 @@
 #ifndef validation  
 #define validation
 
-bool validate(char *expresion){
+bool validate(std::string expresion){
 
 //    expresion.erase(remove(expresion.begin(), expresion.end(), ' '), expresion.end()); // no spaces
 
