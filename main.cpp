@@ -5,10 +5,9 @@
 
 int main() {
     std::string expression;
-    
     while (std::cin >> expression){
         if(validate(expression)){
-            parse(expression);
+            std::cout << parse(expression);
         }
     }
     return 0;
