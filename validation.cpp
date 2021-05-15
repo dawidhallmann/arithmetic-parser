@@ -1,4 +1,6 @@
-bool validate(string ex){
+export module validation;
+
+export module bool validate(string ex){
     
     ex.erase(remove(ex.begin(), ex.end(), ' '), ex.end()); // no spaces
     

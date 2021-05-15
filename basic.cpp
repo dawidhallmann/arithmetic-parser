@@ -1,4 +1,6 @@
-int parse(string ex){
+export module basic;
+
+export module int parse(string ex){
     cout << "parsowanie\n";
     return 0;
 //    El* elements[MAX_LEN];
