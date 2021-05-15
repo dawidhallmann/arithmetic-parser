@@ -1,20 +1,15 @@
-#ifndef validation  
+#ifndef validation
 #define validation
 
-bool validate(std::string expresion){
+#include <cctype>
 
-//    expresion.erase(remove(expresion.begin(), expresion.end(), ' '), expresion.end()); // no spaces
-
-    // for po stringu i sprawdzanie czy są tylko dozwolone znaki
-
-//    string dozwolone_znaki = "1234567890+-/*()[]";
-//
-//    for (int a = 0; a<ex.size(); a++)
-//        if (dozwolone_znaki.find(ex[a]) == std::string::npos){
-//            std::cout << "Wykryto zakazane znaki lub symbole\n";
-//            return false;
-//        }
-//
-//    return true;
+std::string charactersAllowed = "1234567890+-/*()[] "; // spaces allowed
+bool validate(std::string ex){
+    for (int a = 0; a<ex.size(); a++)
+        if (charactersAllowed.find(ex[a]) == std::string::npos){
+            std::cout << "Wykryto zakazany symbol\n" << "na pozycji " << (a+1) << "\n";
+            return false;
+        }
+    return true;
 }
 #endif
