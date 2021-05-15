@@ -1,14 +1,12 @@
 #include <iostream>
 
-#include <fstream>
-
-import validation;
-import basic;
+#include <validation.h>
+#include <basic.h>
 
 int main() {
-    string expression;
+    char expression[100];
     
-    while (cin >> expression){
+    while (std::cin >> expression){
         if(validate(expression)){
             parse(expression);
         }
