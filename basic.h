@@ -19,6 +19,10 @@ double parse(const std::string& expresion){
     char currOperation='+';
     for( const auto &c : expresion ) {
         if(c=='+' || c=='-' || c=='*' || c=='/'){
+//          currNumber could be one of ["2.5.2", ".56", "23.", "."]
+//          although it may be good idea to allow ".14" format and just remove dot from "65." format
+//          create function to validate it here or validate it in validate()
+//          i think that validating here would be easier but its up to you
             arithmeticExpression.emplace_back(std::stod(currNumber), currOperation);
             currNumber = "";
             currOperation = c;
