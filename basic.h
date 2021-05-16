@@ -14,8 +14,6 @@ public:
 };
 
 double parse(const std::string& expresion){
-    double result=0;
-
     std::vector<arithmeticOperation> arithmeticExpression;
     std::string currNumber;
     char currOperation='+';
@@ -30,19 +28,29 @@ double parse(const std::string& expresion){
     }
     arithmeticExpression.emplace_back(std::stod(currNumber), currOperation);
 
+    std::vector<arithmeticOperation> reducedMultiply;
     for (const auto el: arithmeticExpression){
+        switch (el.operation) {
+            case '*':
+                reducedMultiply.back().number *= el.number;
+                break;
+            case '/':
+                reducedMultiply.back().number /= el.number;
+                break;
+            default:
+                reducedMultiply.emplace_back(el);
+                break;
+        }
+    }
+
+    double result=0;
+    for (const auto el: reducedMultiply){
         switch (el.operation) {
             case '+':
                 result += el.number;
                 break;
             case '-':
                 result -= el.number;
-                break;
-            case '*':
-                result *= el.number;
-                break;
-            case '/':
-                result /= el.number;
                 break;
         }
     }
