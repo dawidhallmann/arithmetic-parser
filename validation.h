@@ -26,25 +26,25 @@ bool validateBrackets(std::string ex){
     bool lastCharWasAOperationCharacter=false;
     bool lastWasBracket=false;
 
-    for (int a = 0; a<ex.size(); a++){
+    for (char a : ex){
 
-        if (bracketsType1Open.find(ex[a]) != std::string::npos){
+        if (bracketsType1Open.find(a) != std::string::npos){
             bracketsType1OpenCount++;
 
-            if(lastWasBracket && aritmeticOperationsCharacters.find(ex[a]) != std::string::npos){
+            if(lastWasBracket && aritmeticOperationsCharacters.find(a) != std::string::npos){
                 std::cout << "Blad: znak arytmetyczny za nawiasem\n";
                 return false;
             }
         }
-        if (bracketsType2Open.find(ex[a]) != std::string::npos){
+        if (bracketsType2Open.find(a) != std::string::npos){
             bracketsType2OpenCount++;
 
-            if(lastWasBracket && aritmeticOperationsCharacters.find(ex[a]) != std::string::npos){
+            if(lastWasBracket && aritmeticOperationsCharacters.find(a) != std::string::npos){
                 std::cout << "Blad: znak arytmetyczny za nawiasem\n";
                 return false;
             }
         }
-        if (bracketsType1Close.find(ex[a]) != std::string::npos){
+        if (bracketsType1Close.find(a) != std::string::npos){
             bracketsType1CloseCount++;
 
             if(bracketsType1OpenCount < bracketsType1CloseCount){
@@ -57,7 +57,7 @@ bool validateBrackets(std::string ex){
                 return false;
             }
         }
-        if (bracketsType2Close.find(ex[a]) != std::string::npos){
+        if (bracketsType2Close.find(a) != std::string::npos){
             bracketsType2CloseCount++;
 
             if(bracketsType2OpenCount < bracketsType2CloseCount){
@@ -71,8 +71,8 @@ bool validateBrackets(std::string ex){
             }
         }
 
-        lastCharWasAOperationCharacter = aritmeticOperationsCharacters.find(ex[a]) != std::string::npos;
-        lastWasBracket = brackets.find(ex[a]) != std::string::npos;
+        lastCharWasAOperationCharacter = aritmeticOperationsCharacters.find(a) != std::string::npos;
+        lastWasBracket = brackets.find(a) != std::string::npos;
 
     }
 
@@ -122,7 +122,7 @@ bool validateStructure(std::string ex){
     return true;
 }
 
-bool validate(std::string ex){
+bool validate(const std::string& ex){
     if(!validateBrackets(ex))
         return false;
     if(!validateNumbers(ex))
