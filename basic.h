@@ -13,7 +13,7 @@ public:
   }
 };
 
-double parse(const std::string& expresion){
+double basicParse(const std::string& expresion){
     std::vector<arithmeticOperation> arithmeticExpression;
     std::string currNumber;
     char currOperation='+';
