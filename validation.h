@@ -114,8 +114,8 @@ bool validateStructure(std::string ex){
         lastCharWasAOperationCharacter = aritmeticOperationsCharacters.find(ex[a]) != std::string::npos;
     }
 
-    for (int a = 0; a<ex.size(); a++)
-        if (charactersAllowed.find(ex[a]) == std::string::npos){
+    for (char a : ex)
+        if (charactersAllowed.find(a) == std::string::npos){
             std::cout << "Zla struktura wyrazenia arytmetycznego\n";
             return false;
         }
