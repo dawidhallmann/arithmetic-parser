@@ -11,6 +11,9 @@
 
 int main() {
     std::string expression;
+
+    std::cout << "Wpisz dzialanie\n";
+
     while (std::getline(std::cin, expression)){
         if(validate(expression)){
             std::cout << parse(expression) << "\n";

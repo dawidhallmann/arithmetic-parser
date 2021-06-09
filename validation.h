@@ -4,8 +4,85 @@
 #include <cctype>
 #include <regex>
 
-std::string charactersAllowed = "1234567890+-/*. "; // spaces allowed
+std::string charactersAllowed = "1234567890+-/*.()[] "; // spaces allowed
 std::string aritmeticOperationsCharacters = "+-/*";
+
+bool validateBrackets(std::string ex){
+    /*
+        open -> '(['
+        close -> ')]'
+    */
+    std::string brackets = "((]]";
+    std::string bracketsType1Open = "(";
+    std::string bracketsType2Open = "[";
+    std::string bracketsType1Close = ")";
+    std::string bracketsType2Close = "]";
+
+    int bracketsType1OpenCount = 0;
+    int bracketsType2OpenCount = 0;
+    int bracketsType1CloseCount = 0;
+    int bracketsType2CloseCount = 0;
+
+    bool lastCharWasAOperationCharacter=false;
+    bool lastWasBracket=false;
+
+    for (int a = 0; a<ex.size(); a++){
+
+        if (bracketsType1Open.find(ex[a]) != std::string::npos){
+            bracketsType1OpenCount++;
+
+            if(lastWasBracket && aritmeticOperationsCharacters.find(ex[a]) != std::string::npos){
+                std::cout << "Blad: znak arytmetyczny za nawiasem\n";
+                return false;
+            }
+        }
+        if (bracketsType2Open.find(ex[a]) != std::string::npos){
+            bracketsType2OpenCount++;
+
+            if(lastWasBracket && aritmeticOperationsCharacters.find(ex[a]) != std::string::npos){
+                std::cout << "Blad: znak arytmetyczny za nawiasem\n";
+                return false;
+            }
+        }
+        if (bracketsType1Close.find(ex[a]) != std::string::npos){
+            bracketsType1CloseCount++;
+
+            if(bracketsType1OpenCount < bracketsType1CloseCount){
+                std::cout << "Blad: nazwias zamykajacy przed otwierajacym\n";
+                return false;
+            }
+
+            if(lastCharWasAOperationCharacter){
+                std::cout << "Blad: nazwias zamykajacy przed znakiem dzialania\n";
+                return false;
+            }
+        }
+        if (bracketsType2Close.find(ex[a]) != std::string::npos){
+            bracketsType2CloseCount++;
+
+            if(bracketsType2OpenCount < bracketsType2CloseCount){
+                std::cout << "Blad: nazwias zamykajacy przed otwierajacym\n";
+                return false;
+            }
+
+            if(lastCharWasAOperationCharacter){
+                std::cout << "Blad: nazwias zamykajacy przed znakiem dzialania\n";
+                return false;
+            }
+        }
+
+        lastCharWasAOperationCharacter = aritmeticOperationsCharacters.find(ex[a]) != std::string::npos;
+        lastWasBracket = brackets.find(ex[a]) != std::string::npos;
+
+    }
+
+    if(bracketsType1OpenCount != bracketsType1CloseCount || bracketsType2OpenCount != bracketsType2CloseCount){
+        std::cout << "Zla ilosc nawiasow\n";
+        return false;
+    }
+
+    return true;
+}
 
 bool validateNumbers(std::string ex){
     std::string str = ex;
@@ -46,6 +123,8 @@ bool validateStructure(std::string ex){
 }
 
 bool validate(std::string ex){
+    if(!validateBrackets(ex))
+        return false;
     if(!validateNumbers(ex))
         return false;
     if(!validateStructure(ex))
