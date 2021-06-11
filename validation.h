@@ -4,7 +4,7 @@
 #include <cctype>
 #include <regex>
 
-std::string charactersAllowed = "1234567890+-/*.()[] "; // spaces allowed
+std::string charactersAllowed = "1234567890+-/*.() "; // spaces allowed
 std::string aritmeticOperationsCharacters = "+-/*";
 
 bool validateBrackets(std::string ex){
@@ -12,11 +12,11 @@ bool validateBrackets(std::string ex){
         open -> '(['
         close -> ')]'
     */
-    std::string brackets = "((]]";
+    std::string brackets = "((";
     std::string bracketsType1Open = "(";
-    std::string bracketsType2Open = "[";
+    // std::string bracketsType2Open = "[";
     std::string bracketsType1Close = ")";
-    std::string bracketsType2Close = "]";
+    // std::string bracketsType2Close = "]";
 
     int bracketsType1OpenCount = 0;
     int bracketsType2OpenCount = 0;
@@ -36,14 +36,14 @@ bool validateBrackets(std::string ex){
                 return false;
             }
         }
-        if (bracketsType2Open.find(a) != std::string::npos){
-            bracketsType2OpenCount++;
+        // if (bracketsType2Open.find(a) != std::string::npos){
+        //     bracketsType2OpenCount++;
 
-            if(lastWasBracket && aritmeticOperationsCharacters.find(a) != std::string::npos){
-                std::cout << "Blad: znak arytmetyczny za nawiasem\n";
-                return false;
-            }
-        }
+        //     if(lastWasBracket && aritmeticOperationsCharacters.find(a) != std::string::npos){
+        //         std::cout << "Blad: znak arytmetyczny za nawiasem\n";
+        //         return false;
+        //     }
+        // }
         if (bracketsType1Close.find(a) != std::string::npos){
             bracketsType1CloseCount++;
 
@@ -57,26 +57,26 @@ bool validateBrackets(std::string ex){
                 return false;
             }
         }
-        if (bracketsType2Close.find(a) != std::string::npos){
-            bracketsType2CloseCount++;
+        // if (bracketsType2Close.find(a) != std::string::npos){
+        //     bracketsType2CloseCount++;
 
-            if(bracketsType2OpenCount < bracketsType2CloseCount){
-                std::cout << "Blad: nazwias zamykajacy przed otwierajacym\n";
-                return false;
-            }
+        //     if(bracketsType2OpenCount < bracketsType2CloseCount){
+        //         std::cout << "Blad: nazwias zamykajacy przed otwierajacym\n";
+        //         return false;
+        //     }
 
-            if(lastCharWasAOperationCharacter){
-                std::cout << "Blad: nazwias zamykajacy przed znakiem dzialania\n";
-                return false;
-            }
-        }
+        //     if(lastCharWasAOperationCharacter){
+        //         std::cout << "Blad: nazwias zamykajacy przed znakiem dzialania\n";
+        //         return false;
+        //     }
+        // }
 
         lastCharWasAOperationCharacter = aritmeticOperationsCharacters.find(a) != std::string::npos;
         lastWasBracket = brackets.find(a) != std::string::npos;
 
     }
 
-    if(bracketsType1OpenCount != bracketsType1CloseCount || bracketsType2OpenCount != bracketsType2CloseCount){
+    if(bracketsType1OpenCount != bracketsType1CloseCount /* || bracketsType2OpenCount != bracketsType2CloseCount */){
         std::cout << "Zla ilosc nawiasow\n";
         return false;
     }
