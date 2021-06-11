@@ -6,6 +6,7 @@
 
 std::string charactersAllowed = "1234567890+-/*.() "; // spaces allowed
 std::string aritmeticOperationsCharacters = "+-/*";
+std::string aritmeticOperationsCharactersAndBrackets = "+-/*()";
 
 bool validateBrackets(std::string ex){
     /*
@@ -86,7 +87,7 @@ bool validateBrackets(std::string ex){
 
 bool validateNumbers(std::string ex){
     std::string str = ex;
-    std::string const delims{aritmeticOperationsCharacters};
+    std::string const delims{aritmeticOperationsCharactersAndBrackets};
     size_t beg, pos = 0;
     while ((beg = str.find_first_not_of(delims, pos)) != std::string::npos){
         pos = str.find_first_of(delims, beg + 1);
